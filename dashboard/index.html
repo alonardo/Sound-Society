@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sound & Society | How Music Reflects America</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation"></script>
+</head>
+<body>
+    <div class="app">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo" onclick="showSection('home')">
+                    <div class="logo-icon">
+                        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="20" cy="20" r="18" stroke="currentColor" stroke-width="2"/>
+                            <circle cx="20" cy="20" r="12" stroke="currentColor" stroke-width="1.5"/>
+                            <circle cx="20" cy="20" r="6" stroke="currentColor" stroke-width="1"/>
+                            <circle cx="20" cy="20" r="2" fill="currentColor"/>
+                        </svg>
+                    </div>
+                    <div class="logo-text">
+                        <h1>Sound & Society</h1>
+                        <span class="subtitle">How Music Reflects America</span>
+                    </div>
+                </div>
+                <nav class="nav">
+                    <button class="nav-btn active" data-section="home">Home</button>
+                    <button class="nav-btn" data-section="explore">Explore</button>
+                    <button class="nav-btn" data-section="trends">Trends</button>
+                    <button class="nav-btn" data-section="summary">Summary</button>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main">
+            <!-- HOME / EXPLAINER Section -->
+            <section id="home" class="section active">
+                <div class="hero">
+                    <h2 class="hero-title">What can 65 years of hit songs tell us about America?</h2>
+                    <p class="hero-subtitle">
+                        We analyzed <span class="highlight" id="hero-song-count">6,500</span> Billboard Hot 100 songs
+                        from <span class="highlight">1959 to 2023</span> to uncover how music reflects our culture,
+                        emotions, and evolving language.
+                    </p>
+                </div>
+
+                <div class="explainer-grid">
+                    <div class="explainer-card">
+                        <div class="explainer-icon">📊</div>
+                        <h3>What We Measured</h3>
+                        <p><strong>Sentiment Analysis</strong> — Is the song positive, negative, or neutral? We use VADER AI to score the emotional tone of each song's lyrics.</p>
+                        <p><strong>Lexical Diversity</strong> — How varied is the vocabulary? Higher TTR scores mean more unique words; lower scores mean more repetition.</p>
+                        <p><strong>TF-IDF Keywords</strong> — Which words are most distinctive to each genre? TF-IDF finds words that are common within a genre but rare elsewhere.</p>
+                        <p><strong>Word Frequency</strong> — What words appear most often? See which terms define each genre and decade (stopwords removed).</p>
+                    </div>
+
+                    <div class="explainer-card">
+                        <div class="explainer-icon">🎵</div>
+                        <h3>Why It Matters</h3>
+                        <p>Music is a mirror. When times are tough, do lyrics get darker? When vocabulary shrinks, does it signal cultural shifts?</p>
+                        <p>From the protest songs of the 60s to the hip-hop revolution of the 90s to today's streaming hits—<em>every era tells a story through its songs.</em></p>
+                    </div>
+
+                    <div class="explainer-card">
+                        <div class="explainer-icon">🔍</div>
+                        <h3>How to Explore</h3>
+                        <p><strong>Explore</strong> — Dive into genres and decades. See the most common words in Rock vs. Hip-Hop, discover which words are distinctive to each genre via TF-IDF.</p>
+                        <p><strong>Trends</strong> — Watch sentiment and vocabulary change over time, with major historical events marked as hoverable dots on the timeline.</p>
+                    </div>
+                </div>
+
+                <div class="stats-bar">
+                    <div class="stat-item">
+                        <span class="stat-number" id="stat-songs">—</span>
+                        <span class="stat-text">Songs Analyzed</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" id="stat-years">—</span>
+                        <span class="stat-text">Years of Music</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" id="stat-genres">—</span>
+                        <span class="stat-text">Genres</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" id="stat-words">—</span>
+                        <span class="stat-text">Words Processed</span>
+                    </div>
+                </div>
+
+                <div class="cta-section">
+                    <button class="cta-btn" onclick="showSection('explore')">
+                        Start Exploring →
+                    </button>
+                </div>
+            </section>
+
+            <!-- EXPLORE Section (Genre-focused) -->
+            <section id="explore" class="section">
+                <div class="section-header">
+                    <h2>Explore by Genre</h2>
+                    <p class="section-desc">Discover what words define each genre and how they've changed over time</p>
+                </div>
+
+                <!-- Filters -->
+                <div class="filter-bar">
+                    <div class="filter-group">
+                        <label>Genre</label>
+                        <select id="genre-filter">
+                            <option value="">All Genres</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Decade</label>
+                        <select id="decade-filter">
+                            <option value="">All Decades</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Year</label>
+                        <select id="year-filter">
+                            <option value="">All Years</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Genre Stats -->
+                <div class="genre-stats-row" id="genre-stats-row">
+                    <!-- Populated by JS -->
+                </div>
+
+                <!-- Charts Row -->
+                <div class="comparison-grid">
+                    <!-- Word Frequency Chart -->
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h3 id="word-freq-title">Top Words in All Songs</h3>
+                            <p id="word-freq-subtitle">Most frequently used words (excluding stopwords)</p>
+                        </div>
+                        <div class="chart-container tall">
+                            <canvas id="wordFreqChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- TF-IDF Keywords -->
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h3 id="tfidf-title">Distinctive Keywords by Genre</h3>
+                            <p>Words that define each genre (TF-IDF: common within, rare elsewhere)</p>
+                        </div>
+                        <div class="tfidf-keywords" id="tfidf-keywords">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Genre Comparison -->
+                <div class="comparison-grid">
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h3>Sentiment by Genre</h3>
+                            <p>Average emotional tone (-1 negative to +1 positive)</p>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="genreSentimentChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h3>Vocabulary Richness by Genre</h3>
+                            <p>Lexical diversity (higher = more varied vocabulary)</p>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="genreDiversityChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+
+            <!-- TRENDS Section -->
+            <section id="trends" class="section">
+                <div class="section-header">
+                    <h2>Trends Over Time</h2>
+                    <p class="section-desc">Watch how music evolved alongside American history</p>
+                </div>
+
+                <!-- Controls -->
+                <div class="trends-controls">
+                    <div class="control-group">
+                        <label>Metric</label>
+                        <select id="trend-metric">
+                            <option value="sentiment">Sentiment (Emotional Tone)</option>
+                            <option value="diversity">Lexical Diversity (Vocabulary)</option>
+                            <option value="wordcount">Average Word Count</option>
+                        </select>
+                    </div>
+                    <div class="control-group">
+                        <label>From Year</label>
+                        <select id="trend-year-start">
+                            <!-- Populated by JS -->
+                        </select>
+                    </div>
+                    <div class="control-group">
+                        <label>To Year</label>
+                        <select id="trend-year-end">
+                            <!-- Populated by JS -->
+                        </select>
+                    </div>
+                    <div class="control-group">
+                        <label>Show Events</label>
+                        <label class="toggle">
+                            <input type="checkbox" id="show-events" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Main Trend Chart -->
+                <div class="chart-card full-width">
+                    <div class="chart-header">
+                        <h3 id="trends-chart-title">Sentiment Over Time</h3>
+                        <p id="trends-chart-subtitle">How the emotional tone of hit songs has changed</p>
+                    </div>
+                    <div class="chart-container extra-tall">
+                        <canvas id="trendsChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Events Selector -->
+                <div class="events-selector" id="events-selector">
+                    <div class="events-selector-header">
+                        <h4>Historical Events</h4>
+                        <p class="events-selector-hint">Click events to toggle them on the chart</p>
+                    </div>
+
+                    <!-- Search -->
+                    <div class="events-search">
+                        <input type="text" id="event-search" placeholder="Search events...">
+                    </div>
+
+                    <!-- Category Filters -->
+                    <div class="events-categories" id="events-categories">
+                        <!-- Populated by JS -->
+                    </div>
+
+                    <!-- Events List -->
+                    <div class="events-list-container" id="events-list">
+                        <!-- Populated by JS -->
+                    </div>
+
+                    <!-- Clear/Select All -->
+                    <div class="events-actions">
+                        <button class="events-action-btn" onclick="clearAllEvents()">Clear All</button>
+                        <button class="events-action-btn" onclick="selectAllVisibleEvents()">Select Visible</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SUMMARY Section -->
+            <section id="summary" class="section">
+                <div class="section-header">
+                    <h2>Genre Summary</h2>
+                    <p class="section-desc">What makes each genre unique based on lyrical analysis</p>
+                </div>
+
+                <div class="summary-grid" id="summary-grid">
+                    <!-- Populated by JS -->
+                </div>
+            </section>
+
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Data: Kaggle Billboard Year-End Hot 100 (1959-2023) • Analysis: VADER Sentiment, NLP</p>
+        </footer>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

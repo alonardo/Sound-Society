@@ -1,0 +1,44 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+ENV/
+env/
+.venv/
+
+# Environment variables
+.env
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Data files (too large for git)
+data/raw/
+data/processed/data.json
+data/processed/lyrics/
+data/logs/
+
+# Keep the events.json as it's small and important
+!data/processed/events.json
+
+# Kaggle dataset
+*.csv
+
+# Node modules (if any)
+node_modules/
+
+# Claude files
+.claude/
+
+# Source data (Kaggle download)
+source_data/

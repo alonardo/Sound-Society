@@ -1,0 +1,11 @@
+# NLP and text processing
+nltk>=3.8.1
+
+# TF-IDF vectorization
+scikit-learn>=1.3.0
+
+# Environment variable management
+python-dotenv>=1.0.0
+
+# Progress bars
+tqdm>=4.66.0

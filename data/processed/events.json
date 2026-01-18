@@ -1,0 +1,82 @@
+{
+  "categories": {
+    "us_domestic": {
+      "label": "US Domestic",
+      "color": "#3b82f6",
+      "description": "Events primarily affecting the United States"
+    },
+    "global": {
+      "label": "Global",
+      "color": "#ef4444",
+      "description": "Worldwide events and international affairs"
+    },
+    "music_culture": {
+      "label": "Music & Culture",
+      "color": "#a855f7",
+      "description": "Music industry and cultural moments"
+    },
+    "technology": {
+      "label": "Technology",
+      "color": "#22d3ee",
+      "description": "Technological innovations affecting music"
+    }
+  },
+  "events": [
+    {"year": 1963, "label": "\"I Have a Dream\" Speech", "category": "us_domestic"},
+    {"year": 1964, "label": "Civil Rights Act", "category": "us_domestic"},
+    {"year": 1964, "label": "Beatles on Ed Sullivan", "category": "music_culture"},
+    {"year": 1969, "label": "Moon Landing", "category": "technology"},
+    {"year": 1969, "label": "Woodstock Festival", "category": "music_culture"},
+    {"year": 1970, "label": "Kent State Shootings", "category": "us_domestic"},
+    {"year": 1971, "label": "Voting Age Lowered to 18", "category": "us_domestic"},
+    {"year": 1973, "label": "Vietnam War Ends", "category": "global"},
+    {"year": 1974, "label": "Nixon Resignation", "category": "us_domestic"},
+    {"year": 1977, "label": "Disco Era Peak", "category": "music_culture"},
+    {"year": 1979, "label": "Iran Hostage Crisis", "category": "global"},
+    {"year": 1980, "label": "John Lennon Assassination", "category": "music_culture"},
+    {"year": 1981, "label": "MTV Launch", "category": "technology"},
+    {"year": 1983, "label": "Thriller Released", "category": "music_culture"},
+    {"year": 1985, "label": "Live Aid Concert", "category": "music_culture"},
+    {"year": 1985, "label": "We Are the World", "category": "music_culture"},
+    {"year": 1986, "label": "Challenger Disaster", "category": "us_domestic"},
+    {"year": 1989, "label": "Fall of Berlin Wall", "category": "global"},
+    {"year": 1990, "label": "Nelson Mandela Freed", "category": "global"},
+    {"year": 1991, "label": "Soviet Union Dissolves", "category": "global"},
+    {"year": 1991, "label": "Nirvana's Nevermind", "category": "music_culture"},
+    {"year": 1992, "label": "LA Riots", "category": "us_domestic"},
+    {"year": 1994, "label": "Kurt Cobain Death", "category": "music_culture"},
+    {"year": 1995, "label": "Oklahoma City Bombing", "category": "us_domestic"},
+    {"year": 1996, "label": "Tupac Shakur Death", "category": "music_culture"},
+    {"year": 1997, "label": "Notorious B.I.G. Death", "category": "music_culture"},
+    {"year": 1999, "label": "Napster Launch", "category": "technology"},
+    {"year": 2001, "label": "9/11 Attacks", "category": "us_domestic"},
+    {"year": 2001, "label": "iPod Launch", "category": "technology"},
+    {"year": 2003, "label": "iTunes Store Launch", "category": "technology"},
+    {"year": 2004, "label": "Facebook Launch", "category": "technology"},
+    {"year": 2005, "label": "Hurricane Katrina", "category": "us_domestic"},
+    {"year": 2005, "label": "YouTube Launch", "category": "technology"},
+    {"year": 2006, "label": "Spotify Founded", "category": "technology"},
+    {"year": 2007, "label": "iPhone Launch", "category": "technology"},
+    {"year": 2008, "label": "Obama Elected President", "category": "us_domestic"},
+    {"year": 2008, "label": "Financial Crisis", "category": "global"},
+    {"year": 2009, "label": "Michael Jackson Death", "category": "music_culture"},
+    {"year": 2010, "label": "Instagram Launch", "category": "technology"},
+    {"year": 2011, "label": "Occupy Wall Street", "category": "us_domestic"},
+    {"year": 2011, "label": "Bin Laden Killed", "category": "global"},
+    {"year": 2012, "label": "Gangnam Style Viral", "category": "music_culture"},
+    {"year": 2012, "label": "Sandy Hook Shooting", "category": "us_domestic"},
+    {"year": 2013, "label": "Black Lives Matter Founded", "category": "us_domestic"},
+    {"year": 2014, "label": "Streaming Surpasses Downloads", "category": "technology"},
+    {"year": 2015, "label": "Same-Sex Marriage Legalized", "category": "us_domestic"},
+    {"year": 2016, "label": "Prince Death", "category": "music_culture"},
+    {"year": 2017, "label": "Me Too Movement", "category": "global"},
+    {"year": 2018, "label": "March for Our Lives", "category": "us_domestic"},
+    {"year": 2020, "label": "COVID-19 Pandemic", "category": "global"},
+    {"year": 2020, "label": "George Floyd Protests", "category": "us_domestic"},
+    {"year": 2021, "label": "Capitol Insurrection", "category": "us_domestic"},
+    {"year": 2021, "label": "COVID Vaccines Rollout", "category": "technology"},
+    {"year": 2022, "label": "Russia-Ukraine War", "category": "global"},
+    {"year": 2023, "label": "AI Mainstream (ChatGPT)", "category": "technology"},
+    {"year": 2023, "label": "Taylor Swift Eras Tour", "category": "music_culture"}
+  ]
+}
