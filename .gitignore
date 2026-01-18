@@ -24,12 +24,11 @@ Thumbs.db
 
 # Data files (too large for git)
 data/raw/
-data/processed/data.json
 data/processed/lyrics/
 data/logs/
 
-# Keep the events.json as it's small and important
-!data/processed/events.json
+# Keep processed data for Vercel deployment
+# data.json ~5MB, events.json ~3KB
 
 # Kaggle dataset
 *.csv

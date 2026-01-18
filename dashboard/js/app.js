@@ -44,8 +44,8 @@ Chart.defaults.font.family = "'Space Grotesk', sans-serif";
 async function loadData() {
     try {
         const [dataResponse, eventsResponse] = await Promise.all([
-            fetch('../data/processed/data.json'),
-            fetch('../data/processed/events.json')
+            fetch('/data/processed/data.json'),
+            fetch('/data/processed/events.json')
         ]);
 
         if (!dataResponse.ok) throw new Error('Failed to load data.json');
