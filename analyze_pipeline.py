@@ -148,9 +148,57 @@ def is_contaminated_lyrics(lyrics: str) -> bool:
         'dedalus', 'bloom', 'mulligan', 'conmee',  # Joyce Ulysses
         'sharrkan', 'shahrazad', 'scheherazade', 'al-nu',  # 1001 Nights
         'thou art', 'dost thou', 'hath been', 'wherefore art',  # Archaic
+        # TV show scripts
+        '[scene', '[enter', '[exit', 'fade in:', 'fade out:',  # Stage directions
+        'chandler:', 'rachel:', 'monica:', 'joey:', 'ross:', 'phoebe:',  # Friends
     ]
 
     return any(marker in lyrics_lower for marker in contamination_markers)
+
+
+# Custom stopwords for music lyrics TF-IDF
+MUSIC_STOPWORDS = {
+    # Vocal sounds and onomatopoeia (doo-wop style)
+    'doo', 'dooby', 'dum', 'ba', 'la', 'na', 'da', 'sha', 'wa',
+    'dee', 'dit', 'buh', 'mow', 'ra', 'ta', 'pa', 'ma', 'fa',
+
+    # Percussive/rhythmic vocalizations
+    'chh', 'uh', 'ah', 'eh', 'oh', 'oo', 'aa', 'ee', 'ay', 'ayy',
+    'hey', 'ho', 'whoa', 'woah', 'ooh', 'yeah', 'yah', 'ya', 'ye',
+    'huh', 'hmm', 'mm', 'mmm', 'um', 'er', 'em',
+
+    # Extended stylized vocalizations
+    'yuuuuuuu', 'thoia', 'thoing', 'yaka', 'boaw', 'baow',
+
+    # Informal contractions
+    'gimme', 'gonna', 'wanna', 'gotta', 'kinda', 'sorta',
+    'lemme', 'coulda', 'woulda', 'shoulda', 'oughta', 'aint',
+    'cant', 'dont', 'wont', 'didnt', 'doesnt', 'isnt', 'wasnt',
+
+    # Foreign language stopwords (Spanish/Portuguese/French common)
+    'que', 'te', 'mi', 'lo', 'el', 'en', 'la', 'de', 'un', 'una',
+    'es', 'por', 'con', 'se', 'tu', 'yo', 'eu', 'di', 'je', 'le',
+    'si', 'su', 'nos', 'mas', 'pero', 'como', 'para', 'esta',
+
+    # Metadata leakage
+    'feat', 'featuring', 'ft', 'remix', 'version', 'remaster',
+    'remastered', 'live', 'acoustic', 'radio', 'edit',
+
+    # Dialect/slang spellings
+    'dat', 'wha', 'wid', 'inna', 'gyal', 'dutty', 'fuckin',
+    'poppin', 'chasin', 'truckin', 'izz', 'izzle', 'nah',
+
+    # Common filler/nonsense repeated in songs
+    'na', 'sha', 'bop', 'shoop', 'dang', 'ding', 'dong',
+    'tra', 'laa', 'ooo', 'aah', 'ohh', 'ahh', 'uuh',
+
+    # Very common words that don't distinguish genres
+    'got', 'get', 'let', 'come', 'go', 'know', 'see', 'say',
+    'make', 'take', 'give', 'tell', 'want', 'need', 'feel',
+    'think', 'look', 'way', 'day', 'time', 'life', 'world',
+    'man', 'girl', 'boy', 'baby', 'cause', 'cuz', 'cos',
+    'like', 'just', 'now', 'back', 'still', 'right', 'good',
+}
 
 
 def compute_tfidf_by_genre(songs: list[dict], top_n: int = 20) -> dict:
@@ -180,14 +228,18 @@ def compute_tfidf_by_genre(songs: list[dict], top_n: int = 20) -> dict:
     genres = list(genre_documents.keys())
     documents = [" ".join(genre_documents[g]) for g in genres]
 
+    # Combine English stopwords with music-specific stopwords
+    from sklearn.feature_extraction.text import ENGLISH_STOP_WORDS
+    combined_stopwords = list(ENGLISH_STOP_WORDS | MUSIC_STOPWORDS)
+
     # Create TF-IDF vectorizer
     vectorizer = TfidfVectorizer(
         max_features=5000,
-        stop_words='english',  # Additional English stopwords
+        stop_words=combined_stopwords,
         ngram_range=(1, 1),
-        min_df=1,
-        max_df=0.95,
-        token_pattern=r'\b[a-zA-Z]{2,}\b'  # Only words with 2+ letters
+        min_df=2,  # Must appear in at least 2 documents
+        max_df=0.90,  # Ignore terms in >90% of documents
+        token_pattern=r'\b[a-zA-Z]{3,}\b'  # Only words with 3+ letters
     )
 
     try:
@@ -201,12 +253,15 @@ def compute_tfidf_by_genre(songs: list[dict], top_n: int = 20) -> dict:
         # Get TF-IDF scores for this genre
         scores = tfidf_matrix[idx].toarray().flatten()
 
-        # Get top words by TF-IDF score
-        top_indices = scores.argsort()[-top_n:][::-1]
-        top_words = [
-            {"word": feature_names[i], "score": round(scores[i], 4)}
-            for i in top_indices if scores[i] > 0
-        ]
+        # Get top words by TF-IDF score, filtering out remaining noise
+        top_indices = scores.argsort()[-top_n * 2:][::-1]  # Get extra to filter
+        top_words = []
+        for i in top_indices:
+            if scores[i] > 0 and len(top_words) < top_n:
+                word = feature_names[i]
+                # Skip words that are all the same letter repeated
+                if len(set(word)) > 1:
+                    top_words.append({"word": word, "score": round(scores[i], 4)})
 
         result[genre] = top_words
 
@@ -255,14 +310,18 @@ def compute_tfidf_by_genre_decade(songs: list[dict], top_n: int = 15) -> dict:
         genres_in_decade = [k.split("_")[0] for k in decade_keys]
         documents = [" ".join(genre_decade_documents[k]) for k in decade_keys]
 
+        # Combine English stopwords with music-specific stopwords
+        from sklearn.feature_extraction.text import ENGLISH_STOP_WORDS
+        combined_stopwords = list(ENGLISH_STOP_WORDS | MUSIC_STOPWORDS)
+
         # Create TF-IDF vectorizer
         vectorizer = TfidfVectorizer(
             max_features=3000,
-            stop_words='english',
+            stop_words=combined_stopwords,
             ngram_range=(1, 1),
             min_df=1,
-            max_df=0.95,
-            token_pattern=r'\b[a-zA-Z]{2,}\b'
+            max_df=0.90,
+            token_pattern=r'\b[a-zA-Z]{3,}\b'  # Only words with 3+ letters
         )
 
         try:
@@ -273,11 +332,14 @@ def compute_tfidf_by_genre_decade(songs: list[dict], top_n: int = 15) -> dict:
 
         for idx, genre in enumerate(genres_in_decade):
             scores = tfidf_matrix[idx].toarray().flatten()
-            top_indices = scores.argsort()[-top_n:][::-1]
-            top_words = [
-                {"word": feature_names[i], "score": round(scores[i], 4)}
-                for i in top_indices if scores[i] > 0
-            ]
+            top_indices = scores.argsort()[-top_n * 2:][::-1]
+            top_words = []
+            for i in top_indices:
+                if scores[i] > 0 and len(top_words) < top_n:
+                    word = feature_names[i]
+                    # Skip words that are all the same letter repeated
+                    if len(set(word)) > 1:
+                        top_words.append({"word": word, "score": round(scores[i], 4)})
             key = f"{genre}_{decade}"
             result[key] = top_words
 
