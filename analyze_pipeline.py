@@ -237,8 +237,8 @@ def compute_tfidf_by_genre(songs: list[dict], top_n: int = 20) -> dict:
         max_features=5000,
         stop_words=combined_stopwords,
         ngram_range=(1, 1),
-        min_df=2,  # Must appear in at least 2 documents
-        max_df=0.90,  # Ignore terms in >90% of documents
+        min_df=1,  # Allow words unique to one genre (that's what we want!)
+        max_df=0.90,  # Ignore terms in >90% of documents (too common)
         token_pattern=r'\b[a-zA-Z]{3,}\b'  # Only words with 3+ letters
     )
 
