@@ -45,11 +45,82 @@ ARTIST_GENRES = {
         "eminem", "jay-z", "kanye west", "drake", "kendrick lamar", "j. cole",
         "lil wayne", "nicki minaj", "cardi b", "megan thee stallion", "travis scott",
         "post malone", "21 savage", "future", "migos", "lil baby", "dababy",
-        "tupac", "notorious b.i.g.", "nas", "snoop dogg", "dr. dre", "ice cube",
+        "tupac", "2pac", "notorious b.i.g.", "biggie", "nas", "snoop dogg", "dr. dre", "ice cube",
         "ll cool j", "run dmc", "beastie boys", "public enemy", "n.w.a",
         "outkast", "ludacris", "t.i.", "50 cent", "ja rule", "nelly",
-        "missy elliott", "lil kim", "foxy brown", "eve", "lauryn hill",
-        "chance the rapper", "childish gambino", "tyler the creator", "a$ap rocky"
+        "missy elliott", "missy misdemeanor elliott", "lil kim", "foxy brown", "eve", "lauryn hill",
+        "chance the rapper", "childish gambino", "tyler the creator", "a$ap rocky",
+        # Additional hip-hop artists
+        "tag team", "paperboy", "kriss kross", "kris kross", "mc hammer", "vanilla ice",
+        "coolio", "warren g", "bone thugs", "wu-tang", "method man", "redman",
+        "dmx", "juvenile", "master p", "no limit", "cash money", "hot boys",
+        "ying yang twins", "lil jon", "young jeezy", "gucci mane", "waka flocka",
+        "rick ross", "meek mill", "french montana", "2 chainz", "big sean",
+        "kid cudi", "mac miller", "wiz khalifa", "juicy j", "three 6 mafia",
+        "soulja boy", "young thug", "lil uzi", "playboi carti", "roddy ricch",
+        "pop smoke", "juice wrld", "xxxtentacion", "lil peep", "6ix9ine",
+        "doja cat", "saweetie", "city girls", "glorilla", "ice spice",
+        "digital underground", "de la soul", "a tribe called quest", "jungle brothers",
+        "salt-n-pepa", "queen latifah", "mc lyte", "yo-yo",
+        "cypress hill", "house of pain", "arrested development", "fugees",
+        # Additional artists from misclassified songs
+        "busta rhymes", "p. diddy", "puff daddy", "diddy", "pharrell",
+        "jt money", "terror squad", "fat joe", "mystikal", "nivea",
+        "lord tariq", "peter gunz", "n.o.r.e.", "nore", "rich homie quan",
+        "sheck wes", "trick daddy", "mr. cheeks", "dem franchize boyz",
+        "nle choppa", "moneybagg yo", "yfn lucci", "pnb rock",
+        "kodak black", "desiigner", "offset", "metro boomin", "rae sremmurd",
+        "junior mafia", "junior m.a.f.i.a.", "xscape", "tara kemp",
+        "shalamar", "naughty by nature", "bell biv devoe", "bbd",
+        "mo thugs", "bone thugs-n-harmony", "cash money millionaires",
+        "lil scrappy", "lil flip", "lil boosie", "boosie", "webbie",
+        "plies", "ace hood", "dj khaled", "pitbull", "flo rida",
+        "sean kingston", "akon", "t-pain", "kevin gates", "yo gotti",
+        "young dolph", "key glock", "pooh shiesty", "lil durk", "king von",
+        "polo g", "lil tjay", "fivio foreign", "a boogie wit da hoodie",
+        "gunna", "don toliver", "jack harlow", "central cee", "lil nas x",
+        "megan", "meg thee stallion", "mulatto", "latto", "flo milli",
+        # More missing artists from data
+        "jadakiss", "d.r.a.m.", "dram", "lil yachty", "big pun", "big punisher",
+        "trillville", "yung joc", "ray j", "yung berg", "da brat",
+        "mims", "rich boy", "the-dream", "the dream", "fabolous",
+        "ynw melly", "brs kash", "rod wave", "calboy",
+        "jermaine dupri", "bow wow", "lil bow wow", "da brat",
+        "e-40", "too short", "too $hort", "mac dre", "mistah fab",
+        "g-eazy", "tyga", "yg", "dj mustard", "problem",
+        "iggy azalea", "rae sremmurd", "slim jxmmi", "swae lee",
+        "quavo", "takeoff", "huncho", "quality control",
+        "lil mosey", "blueface", "comethazine", "smokepurpp",
+        "ski mask", "denzel curry", "joey badass", "capital steez",
+        "flatbush zombies", "beast coast", "pro era",
+        "action bronson", "riff raff", "lil dicky", "logic", "joyner lucas",
+        "hopsin", "tech n9ne", "strange music", "twista", "do or die",
+        "crucial conflict", "psychodrama", "bump j", "common",
+        "lupe fiasco", "rhymefest", "kanye", "jeremih", "r kelly",
+        "king louie", "chief keef", "lil reese", "fredo santana",
+        "sd", "ballout", "tadoe", "capo", "glo gang",
+        "g herbo", "lil bibby", "young pappy", "fbg duck",
+        # More missing from pop misclassification
+        "tq", "kaliii", "scarface", "lloyd banks", "o.t. genasis", "ot genasis",
+        "tory lanez", "rich the kid", "david banner", "cali swag district",
+        "bryson tiller", "amine", "ahmad", "case", "mase", "lox", "the lox",
+        "sheek louch", "styles p", "jadakiss", "g-unit", "lloyd banks", "tony yayo",
+        "young buck", "obie trice", "stat quo", "cashis", "bobby creekwater",
+        "sisqo", "dru hill", "ginuwine", "tank", "tyrese", "johnny gill",
+        "keith sweat", "joe", "carl thomas", "donell jones", "montel jordan",
+        "montell jordan", "blackstreet", "next", "112", "jagged edge", "silk",
+        "h-town", "intro", "shai", "az yet", "all-4-one", "color me badd",
+        "jodeci", "k-ci", "jojo", "devante swing", "mr dalvin",
+        # Southern hip-hop
+        "scarface", "geto boys", "ugk", "bun b", "pimp c", "chamillionaire",
+        "paul wall", "slim thug", "mike jones", "lil keke", "z-ro", "trae",
+        "trae tha truth", "devin the dude", "big moe", "dj screw", "swishahouse",
+        "8ball", "mjg", "8ball & mjg", "project pat", "la chat", "gangsta boo",
+        "tear da club up thugs", "hypnotize minds", "pastor troy", "lil scrappy",
+        # More missing artists
+        "fetty wap", "monty", "young gunz", "jidenna", "roman gianarthur",
+        "adina howard", "total", "blackstreet", "guy", "teddy riley",
+        "tony toni tone", "babyface", "bobby brown", "new edition", "bel biv devoe"
     ],
     # Country
     "country": [
@@ -76,11 +147,11 @@ ARTIST_GENRES = {
 
 # Keywords in song titles that suggest genres
 TITLE_KEYWORDS = {
-    "rock": ["rock", "guitar", "metal", "punk"],
+    "rock": ["rock", "guitar", "metal", "punk", "grunge"],
     "country": ["country", "cowboy", "truck", "beer", "whiskey", "farm", "texas", "nashville"],
-    "hiphop": ["feat.", "featuring", "ft."],
-    "dance": ["dance", "disco", "party", "club", "dj"],
-    "rnb": ["love", "baby", "heart", "soul"]
+    "hiphop": [],  # Removed - "feat." is too common in all genres now
+    "dance": ["dance", "disco", "club", "dj", "remix"],
+    "rnb": []  # Removed - "love", "baby", "heart" are too common across all genres
 }
 
 # Era-based genre tendencies
@@ -96,19 +167,76 @@ ERA_GENRES = {
 }
 
 
+def normalize_name(name: str) -> str:
+    """
+    Normalize artist name for matching.
+    Removes special characters and normalizes spacing.
+    """
+    import re
+    if not name:
+        return ""
+    # Convert to lowercase
+    name = name.lower()
+    # Remove quotes
+    name = name.replace('"', '').replace("'", "")
+    # Replace hyphens with spaces
+    name = name.replace('-', ' ')
+    # Remove periods but keep spaces (for "T.I." -> "ti")
+    name = re.sub(r'\.', '', name)
+    # Normalize multiple spaces
+    name = re.sub(r'\s+', ' ', name).strip()
+    return name
+
+
 def classify_genre(artist: str, title: str, year: int) -> str:
     """
     Classify a song's genre based on artist, title, and year.
     Returns one of: rock, pop, rnb, hiphop, country, dance, other
     """
+    import re
+
     artist_lower = artist.lower() if artist else ""
+    artist_normalized = normalize_name(artist)
     title_lower = title.lower() if title else ""
 
-    # Check known artists first
-    for genre, artists in ARTIST_GENRES.items():
-        for known_artist in artists:
-            if known_artist in artist_lower:
-                return genre
+    # Extract primary artist (before "feat", "featuring", "ft", "&", "and", "with")
+    # to prioritize matching the main artist over featured artists
+    primary_artist = artist_normalized
+    for sep in [' feat ', ' featuring ', ' ft ', ' & ', ' and ', ' with ', ' x ']:
+        if sep in artist_normalized:
+            primary_artist = artist_normalized.split(sep)[0].strip()
+            break
+
+    # Check known artists - prioritize hip-hop to avoid false pop matches
+    # Genre priority: hiphop > rnb > rock > country > dance > pop
+    genre_priority = ['hiphop', 'rnb', 'rock', 'country', 'dance', 'pop']
+
+    def check_artist_match(artist_str: str, genre: str) -> bool:
+        """Check if artist string matches any known artist in genre."""
+        for known_artist in ARTIST_GENRES.get(genre, []):
+            known_normalized = normalize_name(known_artist)
+
+            # Use word boundary matching for short names, substring for longer ones
+            if len(known_normalized) <= 4:
+                # Short names need word boundaries (e.g., "eve", "pink", "u2", "ti")
+                pattern = r'\b' + re.escape(known_normalized) + r'\b'
+                if re.search(pattern, artist_str):
+                    return True
+            else:
+                # Longer names can use substring matching on normalized version
+                if known_normalized in artist_str:
+                    return True
+        return False
+
+    # First check the PRIMARY artist against prioritized genres
+    for genre in genre_priority:
+        if check_artist_match(primary_artist, genre):
+            return genre
+
+    # Then check the FULL artist string (including featured artists)
+    for genre in genre_priority:
+        if check_artist_match(artist_normalized, genre):
+            return genre
 
     # Check title keywords
     for genre, keywords in TITLE_KEYWORDS.items():

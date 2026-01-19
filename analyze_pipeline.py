@@ -134,10 +134,10 @@ def is_contaminated_lyrics(lyrics: str) -> bool:
         return False
 
     # Word count filter - most effective
-    # Real songs: avg 229 words, max ~4000 for very long songs
+    # Real songs: avg 229 words, max ~2000 for very long songs
     # Contaminated: avg 17,000 words, some 100,000+
     word_count = len(lyrics.split())
-    if word_count > 5000:
+    if word_count > 2500:
         return True
 
     lyrics_lower = lyrics.lower()
