@@ -1,5 +1,5 @@
 /* ============================================
-   Sound & Society - Music Sociology Dashboard
+   Rhymes and Reason - Music Sociology Dashboard
    Professional Dark Theme
    ============================================ */
 
@@ -183,6 +183,46 @@ body {
 .nav-btn.active {
     background: var(--accent-primary);
     color: var(--bg-primary);
+}
+
+/* Hamburger Menu */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 44px;
+    height: 44px;
+    background: transparent;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    padding: 10px;
+}
+
+.hamburger span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: var(--text-secondary);
+    border-radius: 1px;
+    transition: var(--transition-fast);
+}
+
+.hamburger:hover span {
+    background: var(--text-primary);
+}
+
+.hamburger.open span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+
+.hamburger.open span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.open span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
 }
 
 /* ============================================
@@ -1305,8 +1345,31 @@ body {
 
 @media (max-width: 900px) {
     .header-content {
+        flex-wrap: wrap;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+
+    .nav {
+        display: none;
+        width: 100%;
+        order: 3;
         flex-direction: column;
-        gap: var(--spacing-md);
+        margin-top: var(--spacing-sm);
+        padding-top: var(--spacing-sm);
+        border-top: 1px solid var(--border-color);
+    }
+
+    .nav.open {
+        display: flex;
+    }
+
+    .nav-btn {
+        width: 100%;
+        text-align: center;
+        padding: var(--spacing-md);
     }
 
     .lyrics-results {
@@ -1340,14 +1403,407 @@ body {
         width: 100%;
     }
 
-    .nav {
-        width: 100%;
-        justify-content: center;
-    }
-
     .trends-controls {
         flex-direction: column;
         align-items: stretch;
+    }
+}
+
+/* ============================================
+   Timeline Section
+   ============================================ */
+.timeline-controls {
+    display: flex;
+    gap: var(--spacing-xl);
+    align-items: flex-end;
+    flex-wrap: wrap;
+    margin-bottom: var(--spacing-xl);
+    padding: var(--spacing-lg);
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+}
+
+.timeline-playback {
+    display: flex;
+    gap: var(--spacing-sm);
+    align-items: center;
+}
+
+.tl-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid var(--border-color);
+    background: var(--bg-tertiary);
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: var(--transition-fast);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tl-btn:hover {
+    border-color: var(--border-light);
+    color: var(--text-primary);
+    background: var(--bg-hover);
+}
+
+.tl-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.tl-btn.primary {
+    background: var(--accent-primary);
+    border-color: var(--accent-primary);
+    color: var(--bg-primary);
+    width: 48px;
+    height: 48px;
+    font-size: 1.1rem;
+}
+
+.tl-btn.primary:hover {
+    background: #fb923c;
+    border-color: #fb923c;
+}
+
+/* Scrubber Bar */
+.timeline-scrubber {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    padding: var(--spacing-lg) var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+}
+
+.timeline-scrubber::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 2rem;
+    right: 2rem;
+    height: 4px;
+    background: var(--border-color);
+    transform: translateY(-50%);
+    border-radius: 2px;
+    z-index: 0;
+}
+
+.timeline-scrubber::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 2rem;
+    height: 4px;
+    background: var(--accent-primary);
+    transform: translateY(-50%);
+    border-radius: 2px;
+    z-index: 1;
+    width: var(--progress, 0%);
+    transition: width 300ms ease;
+}
+
+.decade-marker {
+    position: relative;
+    z-index: 2;
+    cursor: pointer;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--radius-sm);
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    transition: var(--transition-fast);
+}
+
+.decade-marker:hover {
+    color: var(--text-primary);
+    border-color: var(--border-light);
+}
+
+.decade-marker.passed {
+    color: var(--accent-primary);
+    border-color: var(--accent-primary);
+}
+
+.decade-marker.active {
+    background: var(--accent-primary);
+    border-color: var(--accent-primary);
+    color: var(--bg-primary);
+    font-weight: 600;
+    transform: scale(1.1);
+}
+
+.decade-marker.unavailable {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+/* Current Decade Label */
+.timeline-current {
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+}
+
+.decade-label {
+    font-size: 2.5rem;
+    font-weight: 700;
+    font-family: 'JetBrains Mono', monospace;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: -0.02em;
+}
+
+/* Timeline Content Grid */
+.timeline-content {
+    animation: fadeIn 0.3s ease;
+}
+
+.timeline-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
+}
+
+/* TF-IDF Tag Cloud */
+.tfidf-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-md);
+    min-height: 200px;
+    align-content: flex-start;
+}
+
+.tfidf-tag {
+    display: inline-block;
+    padding: var(--spacing-xs) var(--spacing-md);
+    margin: var(--spacing-xs);
+    border-radius: var(--radius-sm);
+    background: var(--bg-tertiary);
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    transition: opacity 300ms, transform 300ms;
+    border: 1px solid var(--border-color);
+}
+
+.tfidf-tag.large {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--accent-primary);
+    border-color: var(--accent-primary);
+}
+
+.tfidf-tag.medium {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.tfidf-tag.entering {
+    animation: fadeSlideIn 400ms ease forwards;
+}
+
+@keyframes fadeSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Songs List */
+.tl-songs-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.tl-song-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    padding: var(--spacing-sm) var(--spacing-md);
+    background: var(--bg-tertiary);
+    border-radius: var(--radius-sm);
+    transition: var(--transition-fast);
+}
+
+.tl-song-item:hover {
+    background: var(--bg-hover);
+}
+
+.tl-song-rank {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    min-width: 24px;
+}
+
+.tl-song-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.tl-song-title {
+    font-weight: 500;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.tl-song-artist {
+    font-size: 0.8rem;
+    color: var(--accent-primary);
+}
+
+.tl-song-year {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+/* Artists List */
+.tl-artists-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-md);
+    padding: var(--spacing-sm);
+}
+
+.tl-artist-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-sm) var(--spacing-md);
+    background: var(--bg-tertiary);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-color);
+}
+
+.tl-artist-name {
+    font-weight: 500;
+}
+
+.tl-artist-count {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--accent-secondary);
+    background: var(--bg-card);
+    padding: 2px 8px;
+    border-radius: var(--radius-sm);
+}
+
+/* Timeline Events */
+.timeline-events {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xl);
+    margin-top: var(--spacing-lg);
+}
+
+.timeline-events h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: var(--spacing-md);
+    color: var(--text-secondary);
+}
+
+#tl-events-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+}
+
+.tl-event-item {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-xs) var(--spacing-md);
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-xl);
+    font-size: 0.85rem;
+}
+
+.tl-event-year {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 600;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.tl-event-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+/* Timeline Responsive */
+@media (max-width: 1200px) {
+    .timeline-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .timeline-grid .chart-card:last-child {
+        grid-column: span 2;
+    }
+}
+
+@media (max-width: 900px) {
+    .timeline-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .timeline-grid .chart-card:last-child {
+        grid-column: span 1;
+    }
+
+    .timeline-scrubber {
+        flex-wrap: wrap;
+        gap: var(--spacing-sm);
+        padding: var(--spacing-md);
+    }
+
+    .timeline-scrubber::before,
+    .timeline-scrubber::after {
+        display: none;
+    }
+
+    .decade-marker {
+        flex: 1 1 auto;
+        text-align: center;
+    }
+}
+
+@media (max-width: 600px) {
+    .timeline-controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .timeline-playback {
+        justify-content: center;
+    }
+
+    .decade-label {
+        font-size: 1.75rem;
     }
 }
 

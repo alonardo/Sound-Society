@@ -23,7 +23,7 @@ def print_banner():
     """Print startup banner."""
     print()
     print("=" * 60)
-    print("  Sound & Society - Music Sociology Dashboard")
+    print("  Rhymes and Reason - Music Sociology Dashboard")
     print("  Billboard Year-End Hot 100 (1959-2023)")
     print("=" * 60)
     print()
@@ -69,7 +69,7 @@ def serve_dashboard():
 def main():
     """Main entry point."""
     parser = argparse.ArgumentParser(
-        description="Sound & Society - Music Sociology Dashboard",
+        description="Rhymes and Reason - Music Sociology Dashboard",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:

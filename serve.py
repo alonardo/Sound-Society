@@ -31,7 +31,7 @@ def main():
         url = f"http://localhost:{PORT}/dashboard/"
         print()
         print("=" * 50)
-        print("  Sound & Society Dashboard")
+        print("  Rhymes and Reason Dashboard")
         print("=" * 50)
         print()
         print(f"  Server running at: http://localhost:{PORT}")

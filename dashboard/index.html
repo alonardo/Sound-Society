@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sound & Society | How Music Reflects America</title>
+    <title>Rhymes and Reason | What 65 Years of Lyrics Reveal</title>
+    <meta name="description" content="Explore 65 years of Billboard Hot 100 lyrics through sentiment analysis, vocabulary trends, and genre comparisons.">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -26,13 +28,19 @@
                         </svg>
                     </div>
                     <div class="logo-text">
-                        <h1>Sound & Society</h1>
-                        <span class="subtitle">How Music Reflects America</span>
+                        <h1>Rhymes and Reason</h1>
+                        <span class="subtitle">What 65 Years of Lyrics Reveal</span>
                     </div>
                 </div>
+                <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
                 <nav class="nav">
                     <button class="nav-btn active" data-section="home">Home</button>
                     <button class="nav-btn" data-section="explore">Explore</button>
+                    <button class="nav-btn" data-section="timeline">Timeline</button>
                     <button class="nav-btn" data-section="trends">Trends</button>
                     <button class="nav-btn" data-section="summary">Summary</button>
                 </nav>
@@ -184,6 +192,117 @@
                     </div>
                 </div>
 
+            </section>
+
+            <!-- TIMELINE Section -->
+            <section id="timeline" class="section">
+                <div class="section-header">
+                    <h2>Timeline: The Story of Music</h2>
+                    <p class="section-desc">Watch how a genre evolved through the decades</p>
+                </div>
+
+                <!-- Controls Bar -->
+                <div class="timeline-controls">
+                    <div class="filter-group">
+                        <label>Genre</label>
+                        <select id="timeline-genre">
+                            <option value="">Select a genre...</option>
+                        </select>
+                    </div>
+                    <div class="timeline-playback">
+                        <button class="tl-btn" id="tl-prev" title="First decade">⏮</button>
+                        <button class="tl-btn" id="tl-back" title="Previous decade">⏪</button>
+                        <button class="tl-btn primary" id="tl-play" title="Play/Pause">▶</button>
+                        <button class="tl-btn" id="tl-forward" title="Next decade">⏩</button>
+                        <button class="tl-btn" id="tl-next" title="Last decade">⏭</button>
+                    </div>
+                    <div class="filter-group">
+                        <label>Speed</label>
+                        <select id="timeline-speed">
+                            <option value="0.5">0.5x</option>
+                            <option value="1" selected>1x</option>
+                            <option value="2">2x</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Decade Scrubber Bar -->
+                <div class="timeline-scrubber" id="timeline-scrubber">
+                    <!-- JS populates: clickable decade markers -->
+                </div>
+
+                <!-- Current Decade Label -->
+                <div class="timeline-current">
+                    <span class="decade-label" id="tl-decade-label">Select a genre to begin</span>
+                </div>
+
+                <!-- Content Grid (hidden until genre selected) -->
+                <div class="timeline-content" id="timeline-content" style="display: none;">
+                    <div class="timeline-grid">
+                        <!-- Word Frequency Bar Chart -->
+                        <div class="chart-card">
+                            <div class="chart-header">
+                                <h3>Top Words</h3>
+                                <p>Most common words in this era</p>
+                            </div>
+                            <div class="chart-container tall">
+                                <canvas id="tl-word-chart"></canvas>
+                            </div>
+                        </div>
+
+                        <!-- TF-IDF Tag Cloud -->
+                        <div class="chart-card">
+                            <div class="chart-header">
+                                <h3>Distinctive Words</h3>
+                                <p>Words unique to this genre in this decade</p>
+                            </div>
+                            <div class="tfidf-tags" id="tl-tfidf">
+                                <!-- JS populates tags -->
+                            </div>
+                        </div>
+
+                        <!-- Top Songs List -->
+                        <div class="chart-card">
+                            <div class="chart-header">
+                                <h3>Top Songs</h3>
+                                <p>Highest charting songs of the decade</p>
+                            </div>
+                            <div class="tl-songs-list" id="tl-songs">
+                                <!-- JS populates song list -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sentiment Trend (full width) -->
+                    <div class="chart-card full-width">
+                        <div class="chart-header">
+                            <h3>Sentiment Journey</h3>
+                            <p>How the emotional tone changed over time</p>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="tl-sentiment-chart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Top Artists -->
+                    <div class="chart-card full-width">
+                        <div class="chart-header">
+                            <h3>Top Artists</h3>
+                            <p>Most prolific artists in this era</p>
+                        </div>
+                        <div class="tl-artists-list" id="tl-artists">
+                            <!-- JS populates artist list -->
+                        </div>
+                    </div>
+
+                    <!-- Events for Current Decade -->
+                    <div class="timeline-events" id="tl-events">
+                        <h4>What Was Happening</h4>
+                        <div id="tl-events-list">
+                            <!-- JS populates events -->
+                        </div>
+                    </div>
+                </div>
             </section>
 
             <!-- TRENDS Section -->
